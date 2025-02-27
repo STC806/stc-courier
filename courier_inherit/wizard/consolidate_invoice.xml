@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+
+    <record id="view_invoice_report_wizard_form" model="ir.ui.view">
+        <field name="name">invoice.report.wizard.form</field>
+        <field name="model">invoice.report.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Generate Invoice Report">
+                <group>
+                    <field name="selection_type"/>
+                    <field name="from_date" invisible="selection_type == 'by_invoice'"/>
+                    <field name="to_date" invisible="selection_type == 'by_invoice'"/>
+                    <field name="invoice_ids" widget="many2many_tags" invisible="selection_type == 'by_date'"/>
+                    <field name="customer_id" invisible="selection_type == 'by_invoice'"/>
+                </group>
+                <footer>
+                    <button string="Generate Report" type="object" name="generate_invoice_report" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_invoice_report_wizard" model="ir.actions.act_window">
+        <field name="name">Invoice Report Wizard</field>
+        <field name="res_model">invoice.report.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <menuitem name="Invoice Report" id="custom_invoice_monthly_report" parent="dev_courier_management.menu_dev_courier_management"
+              action="action_invoice_report_wizard" sequence="51"/>
+
+</odoo>

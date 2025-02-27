@@ -1,0 +1,39 @@
+<odoo>
+    <data>
+        <record id="shipping_type_tree_view" model="ir.ui.view">
+            <field name="name">shipping.type.tree</field>
+            <field name="model">shipping.type</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="sequence"/>
+                </tree>
+            </field>
+        </record>
+        <record id="shipping_type_form_view" model="ir.ui.view">
+            <field name="name">shipping.type.form</field>
+            <field name="model">shipping.type</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="shipping_type"/>
+                            <field name="sequence"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+        <record model="ir.actions.act_window" id="shipping_type_action_window">
+            <field name="name">Shipping Type</field>
+            <field name="res_model">shipping.type</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+        <menuitem name="Shipping Type Mode" id="shipping_type_menu"
+                  parent="dev_courier_management.menu_courier_configration"
+                  action="shipping_type_action_window"/>
+    </data>
+</odoo>

@@ -1,0 +1,45 @@
+<odoo>
+    <data>
+        <record id="packaging_tree_view" model="ir.ui.view">
+            <field name="name">packaging.name.tree</field>
+            <field name="model">packaging.name</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="packaging_name"/>
+                    <field name="dimensional_internal_id"/>
+                    <field name="dimensional_external_id"/>
+                    <field name="volume_weight"/>
+                    <field name="gross_weight"/>
+                </tree>
+            </field>
+        </record>
+        <record id="packaging_form_view" model="ir.ui.view">
+            <field name="name">packaging.name.form</field>
+            <field name="model">packaging.name</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="packaging_name"/>
+                            <field name="dimensional_internal_id"/>
+                            <field name="dimensional_external_id"/>
+                            <field name="volume_weight"/>
+                            <field name="gross_weight"/>
+                            <field name="temperature"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+        <record model="ir.actions.act_window" id="packaging_action_window">
+            <field name="name">Packaging</field>
+            <field name="res_model">packaging.name</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+        <menuitem name="Packaging" id="packaging_menu"
+                  parent="dev_courier_management.menu_courier_configration"
+                  action="packaging_action_window"/>
+    </data>
+</odoo>
