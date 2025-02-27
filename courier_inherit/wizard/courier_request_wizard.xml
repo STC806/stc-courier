@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="view_courier_request_wizard_form" model="ir.ui.view">
+        <field name="name">courier.request.wizard.form</field>
+        <field name="model">courier.request.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Update to Next State">
+                <group>
+                    <field name="shipping_type_id" readonly="1"/>
+
+                    <!--                    driver dispatched-->
+                    <field name="show_driver_dispatch" invisible="1"/>
+                    <field name="pickup_vender" invisible="show_driver_dispatch != 1"/>
+                    <field name="pickup_date" invisible="show_driver_dispatch != 1"/>
+                    <field name="person_name" invisible="show_driver_dispatch != 1"/>
+                    <field name="pickup_vehicle_number" invisible="show_driver_dispatch != 1"/>
+                    <field name="pickup_person_contact" invisible="show_driver_dispatch != 1"/>
+                    <field name="pickup_remark" invisible="show_driver_dispatch != 1"/>
+
+
+                    <!--                    pob-->
+                    <field name="show_pob" invisible="1"/>
+                    <field name="pob_vendor_id" invisible="show_pob != 1"/>
+                    <field name="pob_vehicle_number" invisible="show_pob != 1"/>
+                    <field name="pob_pickup_datetime" invisible="show_pob != 1"/>
+                    <field name="pob_pickup_temperature" invisible="show_pob != 1"/>
+                    <field name="pob_remarks" invisible="show_pob != 1"/>
+
+
+                    <!--                    drop at airlines-->
+                    <field name="show_drop_airlines" invisible="1"/>
+                    <field name="drop_vender" invisible="show_drop_airlines == False"/>
+                    <field name="drop_date" invisible="show_drop_airlines == False"/>
+                    <field name="drop_vehicle_number" invisible="show_drop_airlines == False"/>
+                    <field name="drop_remark" invisible="show_drop_airlines == False"/>
+
+
+                    <!--                    custom clearance origin-->
+                    <field name="show_custom_clearance" invisible="1"/>
+                    <field name="origin_name_id" invisible="show_custom_clearance == False"/>
+                    <field name="origin_date" invisible="show_custom_clearance == False"/>
+                    <field name="origin_clear_remark" invisible="show_custom_clearance == False"/>
+
+
+                    <!--                    manifest out-->
+
+                    <field name="show_manifest_out" invisible="1"/>
+                    <field name="mode_transport" widget="selection" invisible="show_manifest_out == False"/>
+                    <field name="hide_cd_lr_number" invisible="1"/>
+                    <field name="hide_flight_number_and_bill" invisible="1"/>
+                    <field name="airway_bill_number"
+                           invisible="hide_flight_number_and_bill == False and show_manifest_out == False"/>
+                    <field name="flight_number" invisible="hide_flight_number_and_bill == False"/>
+                    <field name="lr_number" invisible="hide_cd_lr_number == False and show_manifest_out == False"/>
+                    <field name="cd_number" invisible="hide_cd_lr_number == False and show_manifest_out == False"/>
+                    <field name="manifest_vendor_id" invisible="show_manifest_out == False"/>
+                    <field name="from_country_id" invisible="show_manifest_out == False"/>
+                    <field name="from_location_id" domain="[('country_id','=', from_country_id)]"
+                           invisible="show_manifest_out == False"/>
+                    <field name="from_city" invisible="show_manifest_out == False"/>
+                    <field name="via" invisible="show_manifest_out == False"/>
+                    <field name="to_country_id" invisible="show_manifest_out == False"/>
+                    <field name="to_location_id" domain="[('country_id','=', to_country_id)]"
+                           invisible="show_manifest_out == False"/>
+                    <field name="to_city" invisible="show_manifest_out == False"/>
+                    <field name="departure_status" invisible="show_manifest_out == False"/>
+                    <field name="arrival_status" invisible="show_manifest_out == False"/>
+                    <field name="remarks" invisible="show_manifest_out == False"/>
+
+
+                    <!--                    manifest in-->
+
+                    <field name="show_manifest_in" invisible="1"/>
+                    <field name="arrived_date" invisible="show_manifest_in == False"/>
+                    <field name="manifest_in_id" invisible="show_manifest_in == False"/>
+
+                    <!--                    shipment in custom clearance-->
+                    <field name="show_shipment_custom" invisible="1"/>
+                    <field name="shipment_date" invisible="show_shipment_custom == False"/>
+                    <field name="shipment_remarks" invisible="show_shipment_custom == False"/>
+
+                    <!--                    custom clearance at destination-->
+                    <field name="show_clear_destination" invisible="1"/>
+                    <field name="destination_name_id" invisible="show_clear_destination == False"/>
+                    <field name="destination_date" invisible="show_clear_destination == False"/>
+                    <field name="duties_taxes" invisible="show_clear_destination == False"/>
+                    <field name="clear_dest_remarks" invisible="show_clear_destination == False"/>
+
+                    <!--                    recovered from airlines-->
+
+                    <field name="show_recovered_airlines" invisible="1"/>
+                    <field name="recovered_vendor_id" invisible="show_recovered_airlines == False"/>
+                    <field name="recovered_vehicle_number" invisible="show_recovered_airlines == False"/>
+                    <field name="recovered_date" invisible="show_recovered_airlines == False"/>
+                    <field name="recovered_remarks" invisible="show_recovered_airlines == False"/>
+
+                    <!--                    dry ice replenishment-->
+
+                    <field name="show_dre_ice_replenishment" invisible="1"/>
+                    <field name="replenishment_date" invisible="show_dre_ice_replenishment == False"/>
+                    <field name="dry_ice_wt" invisible="show_dre_ice_replenishment == False"/>
+                    <field name="replenishment_remarks" invisible="show_dre_ice_replenishment == False"/>
+
+                    <!--                    DRS(delivery run sheet)-->
+
+                    <field name="show_delivery_run_sheet" invisible="1"/>
+                    <field name="drs_vendor_id" invisible="show_delivery_run_sheet == False"/>
+                    <field name="drs_date" invisible="show_delivery_run_sheet == False"/>
+                    <field name="drs_name" invisible="show_delivery_run_sheet == False"/>
+                    <field name="drs_vehicle_number" invisible="show_delivery_run_sheet == False"/>
+                    <field name="drs_person_contact" invisible="show_delivery_run_sheet == False"/>
+
+
+                    <!--                    delivered-->
+
+                    <field name="show_delivered" invisible="1"/>
+                    <!--                    <field name="delivered_contact_det"/>-->
+                    <field name="receiver_number" invisible="show_delivered == False"/>
+                    <field name="delivered_date" invisible="show_delivered == False"/>
+                    <field name="delivered_remarks" invisible="show_delivered == False"/>
+
+
+                    <!--                    onhold-->
+
+                    <field name="show_onhold" invisible="1"/>
+                    <field name="onhold_date" invisible="show_onhold == False"/>
+                    <field name="custom_clear_remarks" invisible="show_onhold == False"/>
+
+                    <!--                    on transit-->
+
+                    <field name="show_in_transit" invisible="1"/>
+                    <field name="transit_date" invisible="show_in_transit == False"/>
+                    <field name="transit_remarks" invisible="show_in_transit == False"/>
+
+
+                    <field name="next_state_id" readonly="1"/>
+                </group>
+
+                <!--old logic-->
+                    <!--                    driver dispatched-->
+                    <!--                    <field name="show_pickup_vender" invisible="1"/>-->
+                    <!--                    <field name="pickup_vender" invisible="show_pickup_vender == False"/>-->
+                    <!--                    <field name="pickup_date" invisible="show_pickup_vender == False"/>-->
+                    <!--                    <field name="person_name" invisible="show_pickup_vender == False"/>-->
+                    <!--                    <field name="pickup_vehicle_number" invisible="show_pickup_vender == False"/>-->
+                    <!--                    <field name="pickup_person_contact" invisible="show_pickup_vender == False"/>-->
+                    <!--                    <field name="pickup_remark" invisible="show_pickup_vender == False"/>-->
+
+                    <!--                    &lt;!&ndash;                    pob&ndash;&gt;-->
+                    <!--                    <field name="show_drop_vender" invisible="1"/>-->
+                    <!--                    <field name="pob_vendor_id" invisible="show_drop_vender == False"/>-->
+                    <!--                    <field name="pob_vehicle_number" invisible="show_drop_vender == False"/>-->
+                    <!--                    <field name="pob_pickup_datetime" invisible="show_drop_vender == False"/>-->
+                    <!--                    <field name="pob_pickup_temperature" invisible="show_drop_vender == False"/>-->
+                    <!--                    <field name="pob_remarks" invisible="show_drop_vender == False"/>-->
+
+                    <!--                    &lt;!&ndash;                    drop at airlines&ndash;&gt;-->
+                    <!--                    <field name="show_drop_airlines"/>-->
+                    <!--                    <field name="drop_vender" invisible="show_drop_airlines == False"/>-->
+                    <!--                    <field name="drop_date" invisible="show_drop_airlines == False"/>-->
+                    <!--                    <field name="drop_vehicle_number" invisible="show_drop_airlines == False"/>-->
+                    <!--                    <field name="drop_remark" invisible="show_drop_airlines == False"/>-->
+
+
+                    <!--                    &lt;!&ndash;                    manifest out&ndash;&gt;-->
+
+                    <!--                    <field name="show_manifest_out"/>-->
+                    <!--                    <field name="mode_transport" widget="selection" invisible="show_manifest_out == False"/>-->
+                    <!--                    <field name="hide_cd_lr_number" invisible="1"/>-->
+                    <!--                    <field name="hide_flight_number_and_bill" invisible="1"/>-->
+                    <!--                    <field name="airway_bill_number" invisible="hide_flight_number_and_bill == False and show_manifest_out == False"/>-->
+                    <!--                    <field name="flight_number" invisible="hide_flight_number_and_bill == False"/>-->
+                    <!--                    <field name="lr_number" invisible="hide_cd_lr_number == False and show_manifest_out == False"/>-->
+                    <!--                    <field name="cd_number" invisible="hide_cd_lr_number == False and show_manifest_out == False"/>-->
+                    <!--                    <field name="manifest_vendor_id" invisible="show_manifest_out == False"/>-->
+                    <!--                    <field name="from_country_id" invisible="show_manifest_out == False"/>-->
+                    <!--                    <field name="from_location_id" domain="[('country_id','=', from_country_id)]" invisible="show_manifest_out == False"/>-->
+                    <!--                    <field name="from_city" invisible="show_manifest_out == False"/>-->
+                    <!--                    <field name="via" invisible="show_manifest_out == False"/>-->
+                    <!--                    <field name="to_country_id" invisible="show_manifest_out == False"/>-->
+                    <!--                    <field name="to_location_id" domain="[('country_id','=', to_country_id)]" invisible="show_manifest_out == False"/>-->
+                    <!--                    <field name="to_city" invisible="show_manifest_out == False"/>-->
+                    <!--                    <field name="departure_status" invisible="show_manifest_out == False"/>-->
+                    <!--                    <field name="arrival_status" invisible="show_manifest_out == False"/>-->
+                    <!--                    <field name="remarks" invisible="show_manifest_out == False"/>-->
+
+
+                    <!--                    <field name="arrived_date"/>-->
+                    <!--                    <field name="manifest_in_id"/>-->
+                    <!--                    <field name="courier_id" invisible="1"/>-->
+                    <!--                    <field name="cancel_date"/>-->
+                    <!--                    <field name="cancel_reason"/>-->
+                    <!--                    <field name="cancel_remarks"/>-->
+                    <!--                    <field name="destination_name_id"/>-->
+                    <!--                    <field name="destination_date"/>-->
+                    <!--                    <field name="duties_taxes"/>-->
+                    <!--                    <field name="clear_dest_remarks"/>-->
+                    <!--                    <field name="origin_name_id"/>-->
+                    <!--                    <field name="origin_date"/>-->
+                    <!--                    <field name="origin_clear_remark"/>-->
+                    <!--                    <field name="onhold_date"/>-->
+                    <!--                    <field name="custom_clear_remarks"/>-->
+                    <!--                    <field name="delivered_date"/>-->
+                    <!--                    <field name="delivered_contact_det"/>-->
+                    <!--                    <field name="receiver_number"/>-->
+                    <!--                    <field name="delivered_remarks"/>-->
+
+                    <!--                    <field name="drs_vendor_id"/>-->
+                    <!--                    <field name="drs_date"/>-->
+                    <!--                    <field name="drs_name"/>-->
+                    <!--                    <field name="drs_vehicle_number"/>-->
+                    <!--                    <field name="drs_person_contact"/>-->
+
+                    <!--                    <field name="via"/>-->
+                    <!--                    <field name="hide_flight_number_and_bill"/>-->
+                    <!--                    <field name="hide_cd_lr_number"/>-->
+                    <!--                    <field name="manifest_vendor_id"/>-->
+
+                    <!--                    <field name="recovered_vendor_id"/>-->
+                    <!--                    <field name="recovered_vehicle_number"/>-->
+                    <!--                    <field name="recovered_date"/>-->
+                    <!--                    <field name="recovered_remarks"/>-->
+                    <!--                    <field name="replenishment_date"/>-->
+                    <!--                    <field name="dry_ice_wt"/>-->
+                    <!--                    <field name="replenishment_remarks"/>-->
+                    <!--                    <field name="shipment_date"/>-->
+                    <!--                    <field name="shipment_remarks"/>-->
+                    <!--                    <field name="transit_date"/>-->
+                    <!--                    <field name="transit_remarks"/>-->
+                <footer>
+                    <button string="Confirm" type="object" name="confirm_action" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    /
+
+</odoo>

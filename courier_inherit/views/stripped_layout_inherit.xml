@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+   <!--STANDARD Layout-->
+   <!--Inherited the standard external layout for changing company address position-->
+<!--   <template id="custom_standard_external_layout"-->
+<!--             inherit_id="web.external_layout_boxed">-->
+<!--       &lt;!&ndash;report header&ndash;&gt;-->
+<!--       <xpath expr="//div[@class='col-6 text-end mb4']" position="attributes">-->
+<!--           <attribute name="style">color:white;</attribute>-->
+<!--       </xpath>-->
+
+<!--   </template>-->
+</odoo>
