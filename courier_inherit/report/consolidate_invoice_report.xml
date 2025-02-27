@@ -1,0 +1,324 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="report_monthly_invoice">
+        <t t-call="web.html_container">
+            <t t-call="web.basic_layout">
+                <div class="page">
+                    <div class="oe_structure"/>
+                    <t t-foreach="docs" t-as="o">
+                        <div>
+                            <img src="courier_inherit/static/src/img/stc_courier.png"
+                                 style="height:70px;width:250px"/>
+                        </div>
+
+                        <div class="row g-1" style="font-size: 10px; padding: 5px; margin: 5px;">
+                            <!-- From Address -->
+                            <div class="col-6" name="from_address" style="line-height: 1.2;">
+                                <div>
+                                    <span t-field="o.partner_id.name"/>
+                                </div>
+                                <div class="o_address_format">
+                                    <div>
+                                        <span t-field="o.partner_id.street"/>
+                                    </div>
+                                    <t t-if="o.partner_id.street2">
+                                        <div>
+                                            <span t-field="o.partner_id.street2"/>
+                                        </div>
+                                    </t>
+                                    <div>
+                                        <span t-field="o.partner_id.city"/>
+                                    </div>
+                                    <div>
+                                        <span t-field="o.partner_id.state_id.name"/>,
+                                        <span t-field="o.partner_id.zip"/>
+                                    </div>
+                                    <div>
+                                        <span t-field="o.partner_id.country_id.name"/>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- To Address -->
+                            <div class="col-6" name="to_address" style="line-height: 1.2;">
+                                <div>
+                                    GSTIN:
+                                    <span>36AALCC0983C1ZQ</span>
+                                </div>
+                                <div>
+                                    State code:
+                                </div>
+                                <div>
+                                    SAC code:
+                                    <span>996812</span>
+                                </div>
+                                <div>
+                                    Account No:
+                                    <span t-field="o.partner_id.reference_no"/>
+                                </div>
+                                <div>
+                                    Invoice No:
+                                    <span t-field="o.name"/>
+                                </div>
+                                <div>
+                                    Invoice Date:
+                                    <span t-field="o.invoice_date"/>
+                                </div>
+                            </div>
+                        </div>
+                        <!--                        </t>-->
+                    </t>
+                    <div class="container-fluid px-0 border border-dark"
+                         style="font-size: 10px; line-height: 1.2; padding: 5px;">
+                        <t t-set="index" t-value="0"/>
+                        <t t-foreach="docs" t-as="doc">
+                            <t t-foreach="doc.courier_ids" t-as="o">
+                                <!--                                <div class="row g-0" style="margin: 0; padding: 0;">-->
+                                <!-- Left Section -->
+                                <!--                                    <div class="col-6" style="margin: 0; padding: 0;">-->
+
+                                <div class="row g-0" style="margin: 0; padding: 0;">
+                                    <!-- Heading Section -->
+                                    <div class="col-12 p-1 text-center" style="margin: 0; padding: 0;">
+                                        <h4 class="m-0" style="font-size: 12px; text-align: left;">
+                                            <strong>#
+                                                <t t-esc="index + 1"/>
+                                            </strong>
+                                        </h4>
+                                    </div>
+                                </div>
+
+                                <div class="row g-0" style="margin: 0; padding: 0;">
+                                    <!-- Left Column -->
+                                    <div class="col-6" style="margin: 0; padding: 2px;">
+
+                                        <strong>Courier No:</strong>
+                                        <span t-field="o.name"/>
+                                        <br/>
+
+                                        <strong>Study No:</strong>
+                                        <span t-field="o.study_no"/>
+                                        <br/>
+
+                                        <strong>Purchase Order:</strong>
+                                        <span t-field="o.purchase_order"/>
+                                        <br/>
+
+                                        <strong>Total No Pieces:</strong>
+                                        <br/>
+
+                                        <strong>Date:</strong>
+                                        <br/>
+                                        <!-- From Address -->
+                                        <strong>Consignor:</strong>
+                                        <span t-field="o.sender_id.name"/>
+                                        <br/>
+                                        <strong>From Address:</strong>
+                                        <span t-field="o.sender_city"/>,
+                                        <span t-field="o.sender_state_id.name"/>,
+                                        <span t-field="o.sender_zip"/>
+
+
+                                    </div>
+
+                                    <!-- Right Column -->
+                                    <div class="col-6" style="margin: 0; padding: 2px;">
+
+                                        <strong>Temperature:</strong>
+                                        <t t-if="len(o.courier_lines) > 0">
+                                            <span t-field="o.courier_lines[0].temperature"/>
+                                        </t>
+                                        <br/>
+
+                                        <strong>Total Chargeable:</strong>
+                                        <t t-if="len(o.courier_lines) > 0">
+                                            <span t-field="o.courier_lines[0].quantity"/>
+                                        </t>
+                                        <br/>
+
+                                        <strong>Booking Ref:</strong>
+                                        <br/>
+
+                                        <strong>Chargeable Ref:</strong>
+                                        <br/>
+
+                                        <strong>Content Desc:</strong>
+                                        <t t-if="len(o.courier_lines) > 0">
+                                            <span t-field="o.courier_lines[0].description"/>
+                                        </t>
+                                        <br/>
+                                        <!-- To Address -->
+
+                                        <strong>Consignee :</strong>
+                                        <span t-field="o.receiver_id.name"/>
+                                        <br/>
+                                        <strong>To Address:</strong>
+                                        <span t-field="o.receiver_city"/>,
+                                        <span t-field="o.receiver_state_id.name"/>,
+                                        <span t-field="o.receiver_zip"/>
+                                        <br/>
+
+
+                                    </div>
+                                </div>
+                                <br/>
+
+                                <!--                                    </div>-->
+
+                                <!-- Right Section -->
+                                <!--                                    <div class="col-6" style="margin: 0; padding: 0;">-->
+                                <!--                                        <div class="row g-0" style="margin: 0; padding: 0;">-->
+                                <!--                                            &lt;!&ndash; From Section &ndash;&gt;-->
+                                <!--                                            <div class="col-6 border border-dark p-1"-->
+                                <!--                                                 style="font-size: 10px; margin: 0; padding: 0;">-->
+                                <!--                                                <strong>From:</strong>-->
+                                <!--                                                <div>-->
+                                <!--                                                    <span t-field="o.sender_id.name"/>-->
+                                <!--                                                </div>-->
+                                <!--                                                <div class="o_address_format">-->
+                                <!--                                                    <div>-->
+                                <!--                                                        <span t-field="o.sender_street"/>-->
+                                <!--                                                    </div>-->
+                                <!--                                                    <t t-if="o.sender_street2">-->
+                                <!--                                                        <div>-->
+                                <!--                                                            <span t-field="o.sender_street2"/>-->
+                                <!--                                                        </div>-->
+                                <!--                                                    </t>-->
+                                <!--                                                    <div>-->
+                                <!--                                                        <span t-field="o.sender_city"/>-->
+                                <!--                                                    </div>-->
+                                <!--                                                    <div>-->
+                                <!--                                                        <span t-field="o.sender_state_id.name"/>,-->
+                                <!--                                                        <span t-field="o.sender_zip"/>-->
+                                <!--                                                    </div>-->
+                                <!--                                                    <div>-->
+                                <!--                                                        <span t-field="o.sender_country_id.name"/>-->
+                                <!--                                                    </div>-->
+                                <!--                                                </div>-->
+                                <!--                                            </div>-->
+
+                                <!--                                            &lt;!&ndash; To Section &ndash;&gt;-->
+                                <!--                                            <div class="col-6 border border-dark p-1"-->
+                                <!--                                                 style="font-size: 10px; margin: 0; padding: 0;">-->
+                                <!--                                                <strong>To:</strong>-->
+                                <!--                                                <div>-->
+                                <!--                                                    <span t-field="o.receiver_id.name"/>-->
+                                <!--                                                </div>-->
+                                <!--                                                <div class="o_address_format">-->
+                                <!--                                                    <div>-->
+                                <!--                                                        <span t-field="o.receiver_street"/>-->
+                                <!--                                                    </div>-->
+                                <!--                                                    <t t-if="o.receiver_street2">-->
+                                <!--                                                        <div>-->
+                                <!--                                                            <span t-field="o.receiver_street2"/>-->
+                                <!--                                                        </div>-->
+                                <!--                                                    </t>-->
+                                <!--                                                    <div>-->
+                                <!--                                                        <span t-field="o.receiver_city"/>-->
+                                <!--                                                    </div>-->
+                                <!--                                                    <div>-->
+                                <!--                                                        <span t-field="o.receiver_state_id.name"/>,-->
+                                <!--                                                        <span t-field="o.receiver_zip"/>-->
+                                <!--                                                    </div>-->
+                                <!--                                                    <div>-->
+                                <!--                                                        <span t-field="o.receiver_country_id.name"/>-->
+                                <!--                                                    </div>-->
+                                <!--                                                </div>-->
+                                <!--                                            </div>-->
+                                <!--                                        </div>-->
+                                <!--&lt;!&ndash;                                    </div>&ndash;&gt;-->
+                                <!--                                </div>-->
+
+                                <table class="table table-sm m-0" style="font-size: 10px;border: 1px solid black;">
+
+                                    <tr>
+                                        <th style="border-left:solid 1px #aaa;border-bottom: 1px solid black;">#</th>
+                                        <th style="border-bottom: 1px solid black;">Description</th>
+                                        <th style="border-bottom: 1px solid black;">Non Taxable</th>
+                                        <th style="border-bottom: 1px solid black;">Taxable</th>
+                                        <th style="border-bottom: 1px solid black;">FSC
+                                        </th>
+                                    </tr>
+
+
+                                    <t t-set="serial_number" t-value="1"/>
+                                    <t t-foreach="o.invoices_line_ids" t-as="line">
+                                        <tr>
+                                            <td style="border-left:solid 1px #aaa">
+                                                <t t-esc="serial_number"/>
+                                            </td>
+                                            <td>
+                                                <span t-field="line.product_description"/>
+                                            </td>
+                                            <td>
+                                                <!--                                                <span t-field="line.product_description"/>-->
+                                            </td>
+                                            <td>
+                                                <span t-field="line.price_subtotal"/>
+                                                <!--                                                <t t-set="taxes"-->
+                                                <!--                                                   t-value="', '.join([tax.name for tax in line.tax_id])"/>-->
+                                                <!--                                                <span t-out="taxes"/>-->
+                                            </td>
+                                            <td>
+                                                <!--                                                <span t-field="line.price_subtotal"/>-->
+                                            </td>
+                                            <t t-set="serial_number" t-value="serial_number + 1"/>
+                                        </tr>
+                                    </t>
+                                    <tr>
+                                        <th colspan="2" style="border-left:solid 1px #aaa">Subtotal</th>
+                                        <td>0</td>
+                                        <td>
+                                            <!-- Calculate and display the total -->
+                                            <t t-set="total"
+                                               t-value="sum(line.price_subtotal for line in o.invoices_line_ids or [])"/>
+                                             <span t-esc="total" t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                                        </td>
+                                        <td>0</td>
+                                    </tr>
+                                </table>
+                                <t t-set="index" t-value="index + 1"/>
+                            </t>
+                        </t>
+                    </div>
+
+                    <div class="row g-0 mt-2">
+                        <div class="col-12 text-end">
+                            <strong>Total non-Taxable + IFC:</strong>
+
+                        </div>
+                    </div>
+                    <div class="row g-0">
+                        <div class="col-12 text-end">
+                            <strong>Total Taxable + FSC:</strong>
+
+                        </div>
+                    </div>
+                    <br/>
+                    <t t-set="terms_conditions" t-value="docs.narration"/>
+
+                    <div class="row g-0 mt-4">
+                        <div class="col-12">
+                            <!--                            <strong>Terms and Conditions:</strong>-->
+                            <p style="font-size: 12px; text-align: justify;">
+                                <span t-esc="terms_conditions"/>
+                            </p>
+                        </div>
+                    </div>
+
+
+                </div>
+            </t>
+        </t>
+    </template>
+    <record id="invoice_report_action" model="ir.actions.report">
+        <field name="name">Consolidate Invoice Report</field>
+        <field name="model">account.move</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">courier_inherit.report_monthly_invoice</field>
+        <field name="report_file">courier_inherit.report_monthly_invoice</field>
+        <field name="print_report_name">'Consolidate Invoice Report'</field>
+        <field name="binding_model_id" ref="account.model_account_move"/> <!-- Correct reference -->
+        <field name="binding_type">report</field>
+    </record>
+</odoo>
