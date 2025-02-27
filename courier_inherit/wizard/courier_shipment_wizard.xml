@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_courier_shipment_wizard_form" model="ir.ui.view">
+        <field name="name">courier.shipment.wizard.form</field>
+        <field name="model">courier.shipment.wizard</field>
+        <field name="arch" type="xml">
+            <form string="shipment Info">
+                <group>
+                    <field name="shipment_date"/>
+                    <field name="remarks"/>
+                </group>
+                <footer>
+                    <button string="Move to shipment" type="object" name="action_move_to_shipment"
+                            class="btn-primary"/>
+                    <button string="Cancel" class="btn-default" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_view_courier_shipment_wizard" model="ir.actions.act_window">
+        <field name="name">shipment Info</field>
+        <field name="res_model">courier.shipment.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="view_id" ref="view_courier_shipment_wizard_form"/>
+
+    </record>
+</odoo>

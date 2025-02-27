@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+
+    <template id="dev_courier_report_new">
+        <t t-call="web.external_layout">
+            <!--            <t t-foreach="docs" t-as="o">-->
+            <h4>
+                <!--                     <t  t-esc="o.name"/>-->11
+            </h4>
+            <!--            </t>-->
+        </t>
+    </template>
+
+
+    <record id="paperformat_dev_courier_new" model="report.paperformat">
+        <field name="name">Courier Report</field>
+        <field name="default" eval="True"/>
+        <field name="format">A4</field>
+        <field name="orientation">Portrait</field>
+        <field name="margin_top">45</field>
+        <field name="margin_bottom">25</field>
+        <field name="margin_left">7</field>
+        <field name="margin_right">7</field>
+        <field name="header_line" eval="False"/>
+        <field name="header_spacing">40</field>
+        <field name="dpi">90</field>
+    </record>
+
+    <record id="menu_dev_courier_request_report_new" model="ir.actions.report">
+        <field name="name">Print Docket</field>
+        <field name="model">dev.courier.request</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">courier_inherit.dev_courier_report_new</field>
+        <field name="report_file">courier_inherit.dev_courier_report_new</field>
+        <field name="binding_model_id" ref="courier_inherit.model_dev_courier_request"/>
+        <field name="binding_type">report</field>
+        <field name="paperformat_id" ref="paperformat_dev_courier_new"/>
+    </record>
+
+
+</odoo>

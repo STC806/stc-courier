@@ -1,0 +1,37 @@
+<odoo>
+    <data>
+        <record id="dimensional_external_tree_view" model="ir.ui.view">
+            <field name="name">dimension.external.tree</field>
+            <field name="model">dimension.external</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+        <record id="dimensional_external_form_view" model="ir.ui.view">
+            <field name="name">dimension.external.form</field>
+            <field name="model">dimension.external</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+        <record model="ir.actions.act_window" id="dimensional_external_action_window">
+            <field name="name">Dimension external</field>
+            <field name="res_model">dimension.external</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem name="Dimensional External" id="dimensional_external_menu"
+                  parent="dev_courier_management.menu_courier_configration"
+                  action="dimensional_external_action_window"/>
+    </data>
+</odoo>

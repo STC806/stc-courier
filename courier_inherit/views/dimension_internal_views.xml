@@ -1,0 +1,37 @@
+<odoo>
+    <data>
+        <record id="dimensional_internal_tree_view" model="ir.ui.view">
+            <field name="name">dimension.internal.tree</field>
+            <field name="model">dimension.internal</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+        <record id="dimensional_internal_form_view" model="ir.ui.view">
+            <field name="name">dimension.internal.form</field>
+            <field name="model">dimension.internal</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+        <record model="ir.actions.act_window" id="dimensional_internal_action_window">
+            <field name="name">Dimension Internal</field>
+            <field name="res_model">dimension.internal</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem name="Dimensional Internal" id="dimensional_internal_menu"
+                  parent="dev_courier_management.menu_courier_configration"
+                  action="dimensional_internal_action_window"/>
+    </data>
+</odoo>

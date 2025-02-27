@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_courier_manifest_wizard_form" model="ir.ui.view">
+        <field name="name">courier.manifest.wizard.form</field>
+        <field name="model">courier.manifest.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Manifest(out) Info">
+                <group>
+                    <field name="mode_transport" widget="selection"/>
+                    <field name="hide_cd_lr_number" invisible="1"/>
+                    <field name="hide_flight_number_and_bill" invisible="1"/>
+                    <field name="airway_bill_number" invisible="hide_flight_number_and_bill == False"/>
+                    <field name="flight_number" invisible="hide_flight_number_and_bill == False"/>
+                    <field name="lr_number" invisible="hide_cd_lr_number == False"/>
+                    <field name="cd_number" invisible="hide_cd_lr_number == False"/>
+                    <field name="manifest_vendor_id"/>
+                    <field name="from_country_id"/>
+                    <field name="from_location_id" domain="[('country_id','=', from_country_id)]"/>
+                    <field name="from_city"/>
+                    <field name="via"/>
+                    <field name="to_country_id"/>
+                    <field name="to_location_id" domain="[('country_id','=', to_country_id)]"/>
+                    <field name="to_city"/>
+                    <field name="departure_status"/>
+                    <field name="arrival_status"/>
+                    <field name="remarks"/>
+                </group>
+                <footer>
+                    <button string="Move to Manifest" type="object" name="action_move_to_manifest"
+                            class="btn-primary"/>
+                    <button string="Cancel" class="btn-default" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_view_courier_manifest_wizard" model="ir.actions.act_window">
+        <field name="name">manifest Info</field>
+        <field name="res_model">courier.manifest.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="view_id" ref="view_courier_manifest_wizard_form"/>
+
+    </record>
+</odoo>
